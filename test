@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+docker build -f Dockerfile/test -t apt-mirror-test .
+docker run -it --rm --link apt-mirror apt-mirror-test
+# try apt-get update and apt-get install something

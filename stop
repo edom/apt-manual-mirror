@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+docker stop -t 3 apt-mirror-0
+docker rm apt-mirror-0
+docker network rm build

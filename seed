@@ -1,0 +1,37 @@
+#!/bin/sh
+set -e
+main ()
+{
+    MIRROR=http://archive.ubuntu.com
+    UBUNTU=ubuntu
+    TRUSTY=trusty
+    ARCH=amd64
+    mkdir -p content
+    cd content
+    wget -nH -x -m \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/Release \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/Release.gpg \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/Release \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/Release.gpg \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/Release \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/Release.gpg \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/Release \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/Release.gpg \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/main/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/main/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/main/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-security/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/main/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/multiverse/binary-$ARCH/Packages.gz
+}
+main

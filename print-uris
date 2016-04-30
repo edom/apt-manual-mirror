@@ -1,0 +1,7 @@
+#!/bin/sh
+# This finds out the packages you need to download.
+# prerequisites: docker build -t ubuntu-apt-pristine .
+docker run --rm ubuntu-apt-pristine \
+    apt-get --print-uris -qq -y \
+    --no-install-recommends install "$@" \
+    | cut -d"'" -f2

@@ -1,0 +1,36 @@
+#!/bin/sh
+# IMPORTANT: you must run this script from the same directory it is in.
+set -e
+main ()
+{
+    if [ ! -d content ];
+    then
+        echo 'Error: '\'content\'' is not a directory.'
+        echo 'Please '\'cd\'' to the directory containing this script first.'
+        return 1
+    fi
+    NETNAME=build
+    BRNAME=docker1
+    if ! docker network inspect $NETNAME >/dev/null 2>/dev/null; then
+        echo create network: $NETNAME
+        docker network create --subnet=172.18.0.0/16 \
+            -o com.docker.network.bridge.name=$BRNAME \
+            -o com.docker.network.bridge.enable_icc=true \
+            -o com.docker.network.bridge.enable_ip_masquerade=true \
+            $NETNAME
+        # XXX This depends on Docker internals.
+        # This connects two subnets.
+        echo removing network isolation
+        sudo iptables -D DOCKER-ISOLATION -i $BRNAME -o docker0 -j DROP
+        sudo iptables -D DOCKER-ISOLATION -i docker0 -o $BRNAME -j DROP
+    fi
+    if docker inspect apt-mirror-0 >/dev/null 2>/dev/null; then
+        echo container already exists: apt-mirror-0
+        return 1
+    fi
+    echo create container: apt-mirror-0
+    docker run -d --name=apt-mirror-0 --net=$NETNAME --ip=172.18.0.2 \
+        -v `pwd`/content:/usr/share/nginx/html:ro nginx:1.8-alpine
+}
+
+main

@@ -1,0 +1,3 @@
+#!/bin/sh
+# input: list of package names
+sh print-uris "$@" | { cd content; xargs wget -nH -x -m; }
