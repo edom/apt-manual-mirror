@@ -1,37 +1,58 @@
 #!/bin/sh
+
 set -e
-main ()
+
+# Do not put trailing slash in $1.
+
+ubuntu ()
 {
-    MIRROR=http://archive.ubuntu.com
-    UBUNTU=ubuntu
-    TRUSTY=trusty
+    MIRROR=http://archive.ubuntu.com/ubuntu
+    DIST=trusty
     ARCH=amd64
     mkdir -p content
     cd content
     wget -nH -x -m \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/Release \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/Release.gpg \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/Release \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/Release.gpg \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/Release \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/Release.gpg \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/Release \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/Release.gpg \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/main/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/restricted/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/universe/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY/multiverse/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/main/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/restricted/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/universe/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-backports/multiverse/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/main/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/restricted/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/universe/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-security/multiverse/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/main/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/restricted/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/universe/binary-$ARCH/Packages.gz \
-        $MIRROR/$UBUNTU/dists/$TRUSTY-updates/multiverse/binary-$ARCH/Packages.gz
+        $MIRROR/dists/$DIST/Release \
+        $MIRROR/dists/$DIST/Release.gpg \
+        $MIRROR/dists/$DIST-backports/Release \
+        $MIRROR/dists/$DIST-backports/Release.gpg \
+        $MIRROR/dists/$DIST-updates/Release \
+        $MIRROR/dists/$DIST-updates/Release.gpg \
+        $MIRROR/dists/$DIST-security/Release \
+        $MIRROR/dists/$DIST-security/Release.gpg \
+        $MIRROR/dists/$DIST/main/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-backports/main/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-backports/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-backports/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-backports/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-security/main/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-security/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-security/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-security/multiverse/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-updates/main/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-updates/restricted/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-updates/universe/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST-updates/multiverse/binary-$ARCH/Packages.gz
 }
-main
+
+postgres ()
+{
+    MIRROR=http://apt.postgresql.org/pub/repos/apt
+    DIST=trusty-pgdg
+    ARCH=amd64
+    mkdir -p content
+    cd content
+    wget -nH -x -m \
+        $MIRROR/dists/$DIST/InRelease \
+        $MIRROR/dists/$DIST/Release \
+        $MIRROR/dists/$DIST/Release.gpg \
+        $MIRROR/dists/$DIST/9.4/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST/9.5/binary-$ARCH/Packages.gz \
+        $MIRROR/dists/$DIST/main/binary-$ARCH/Packages.gz
+}
+
+ubuntu
+postgres

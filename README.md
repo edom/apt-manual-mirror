@@ -53,10 +53,28 @@ If a package has already been downloaded,
 
 ## Using the mirror
 
-Do these in the Ubuntu installation that you want to make use the mirror.
+Replace the content of `/etc/apt/sources.list` with this:
 
-Replace `/etc/apt/sources.list` with `sources.list`,
-and run `apt-get update`.
+```
+deb http://172.18.0.2/ubuntu/ trusty main
+deb http://172.18.0.2/ubuntu/ trusty restricted
+deb http://172.18.0.2/ubuntu/ trusty universe
+deb http://172.18.0.2/ubuntu/ trusty multiverse
+deb http://172.18.0.2/ubuntu/ trusty-updates main
+deb http://172.18.0.2/ubuntu/ trusty-updates restricted
+deb http://172.18.0.2/ubuntu/ trusty-updates universe
+deb http://172.18.0.2/ubuntu/ trusty-updates multiverse
+deb http://172.18.0.2/ubuntu/ trusty-backports main
+deb http://172.18.0.2/ubuntu/ trusty-backports restricted
+deb http://172.18.0.2/ubuntu/ trusty-backports universe
+deb http://172.18.0.2/ubuntu/ trusty-backports multiverse
+deb http://172.18.0.2/ubuntu/ trusty-security main
+deb http://172.18.0.2/ubuntu/ trusty-security restricted
+deb http://172.18.0.2/ubuntu/ trusty-security universe
+deb http://172.18.0.2/ubuntu/ trusty-security multiverse
+
+deb http://172.18.0.2/pub/repos/apt trusty-pgdg main
+```
 
 ### Start the server
 
@@ -64,7 +82,7 @@ and run `apt-get update`.
 ./start
 ```
 
-This starts a Docker container running a HTTP server on 172.18.0.2:80.
+This starts a Docker container running a HTTP server on `172.18.0.2:80`.
 
 If you cannot connect, you need to drop iptables rules in DOCKER-ISOLATION chain;
 this can be done by just restarting the server like this:
